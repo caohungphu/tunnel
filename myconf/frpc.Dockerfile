@@ -1,4 +1,4 @@
-FROM golang:1.19
+FROM golang:1.17
 WORKDIR /frp
 COPY . .
 RUN make fmt frpc
