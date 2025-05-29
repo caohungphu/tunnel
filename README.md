@@ -16,25 +16,33 @@ This project provides a containerized setup for FRP, allowing you to easily crea
 
 ### Installation
 
+- **Install docker**
+
 ```bash
-git clone https://github.com/caohungphu/tunnel.git
-cd tunnel
+curl -fsSL https://get.docker.com | sudo bash
+sudo usermod -aG docker $USER
 ```
 
-- **Server-side**: Edit configuations in [conf/frps.toml](/conf/frps.toml)
+- **Clone repo**
 
 ```bash
-docker-compose build
-docker-compose up frps -d
-docker-compose restart
+git clone https://github.com/caohungphu/tunnel.git && cd tunnel
 ```
 
-- **Client-side**: Edit configuations in [conf/frpc.toml](/myconf/frpc.toml)
+- **Run Server-side**: Edit configuations in [conf/frps.toml](/conf/frps.toml)
 
 ```bash
-docker-compose build
-docker-compose up frpc -d
-docker-compose restart
+docker compose build
+docker compose up frps -d
+docker compose restart
+```
+
+- **Run Client-side**: Edit configuations in [conf/frpc.toml](/conf/frpc.toml)
+
+```bash
+docker compose build
+docker compose up frpc -d
+docker compose restart
 ```
 
 # Reference

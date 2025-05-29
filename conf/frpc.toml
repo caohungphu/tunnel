@@ -1,2 +1,5 @@
 serverAddr = "0.0.0.0"
 serverPort = 7000
+
+auth.method = "token"
+auth.token = "12345678"
