@@ -15,6 +15,6 @@ FROM gcr.io/distroless/static-debian12
 
 COPY --from=build /app/frps /frps
 
-COPY conf/frps.toml /conf/frps.toml
+COPY conf/frps.toml.example /conf/frps.toml
 
 CMD ["/frps", "-c", "/conf/frps.toml"]
