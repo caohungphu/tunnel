@@ -1,0 +1,20 @@
+# Build stage
+FROM alpine:latest AS build
+
+ARG FRP_VERSION=0.62.1
+
+WORKDIR /app
+
+RUN apk add --no-cache curl tar \
+    && curl -L -o frp.tar.gz https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_${FRP_VERSION}_linux_amd64.tar.gz \
+    && tar -xzf frp.tar.gz \
+    && mv frp_${FRP_VERSION}_linux_amd64/frpc /app/frpc
+
+# Runtime stage
+FROM gcr.io/distroless/static-debian12
+
+COPY --from=build /app/frpc /frpc
+
+COPY conf/frpc.toml /conf/frpc.toml
+
+CMD ["/frpc", "-c", "/conf/frpc.toml"]

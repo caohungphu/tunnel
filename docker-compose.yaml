@@ -1,23 +1,22 @@
-version: "3.9"
 services:
-  frpc:
-    restart: always
-    container_name: frpc
-    image: frp
-    build:
-      context: frp
-      dockerfile: "../myconf/frpc.Dockerfile"
-    volumes:
-      - "./myconf/frpc.ini:/frp/conf/frpc.ini"
-    network_mode: host
-    
   frps:
-    restart: always
-    container_name: frps
-    image: frp
+    image: frps
     build:
-      context: frp
-      dockerfile: "../myconf/frps.Dockerfile"
+      context: .
+      dockerfile: Dockerfile.frps
+    container_name: frps
+    restart: always
     volumes:
-      - "./myconf/frps.ini:/frp/conf/frps.ini"
-    network_mode: host
+      - ./conf/frps.toml:/conf/frps.toml
+    network_mode: "host"
+
+  frpc:
+    image: frpc
+    build:
+      context: .
+      dockerfile: Dockerfile.frpc
+    container_name: frpc
+    restart: always
+    volumes:
+      - ./conf/frps.toml:/conf/frps.toml
+    network_mode: "host"
