@@ -1,10 +1,10 @@
 services:
   frps:
     image: frps
+    container_name: frps
     build:
       context: .
       dockerfile: Dockerfile.frps
-    container_name: frps
     restart: always
     volumes:
       - ./conf/frps.toml:/conf/frps.toml
@@ -12,11 +12,11 @@ services:
 
   frpc:
     image: frpc
+    container_name: frpc
     build:
       context: .
       dockerfile: Dockerfile.frpc
-    container_name: frpc
     restart: always
     volumes:
-      - ./conf/frps.toml:/conf/frps.toml
+      - ./conf/frpc.toml:/conf/frpc.toml
     network_mode: "host"
